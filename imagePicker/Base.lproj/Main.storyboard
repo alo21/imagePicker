@@ -35,6 +35,7 @@
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QSo-lC-qep">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
@@ -47,12 +48,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no"/>
                                 <connections>
                                     <action selector="EditDidBegin:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="4cD-kI-qyy"/>
+                                    <action selector="EditDidEnd:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="d38-es-xlw"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="TOP" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="zen-eA-5bZ" userLabel="TopText">
                                 <rect key="frame" x="16" y="79" width="343" height="17"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                 <connections>
@@ -73,6 +75,7 @@
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

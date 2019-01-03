@@ -28,21 +28,20 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
      var navBar: UINavigationBar = UINavigationBar()
     
-    
-    
-    let memeTextAttributes: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor: UIColor.black,
-        NSAttributedString.Key.foregroundColor: UIColor.black,
-        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-    ]
-    
     struct Meme{
-    
+        
         var topText: String
         var bottomText: String
         var originalImage: UIImage
         var memedImage: UIImage
     }
+    
+    let memeTextAttributes: [NSAttributedString.Key: Any] = [
+        NSAttributedString.Key.foregroundColor: UIColor.white,
+        NSAttributedString.Key.strokeColor: UIColor.black,
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSAttributedString.Key.strokeWidth: -5
+    ]
     
     
     override func viewDidLoad() {
@@ -72,22 +71,16 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewDidAppear(_ animated: Bool) {
         TakeButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
-        bottomText.attributedPlaceholder = NSAttributedString(string: "BOTTOM", attributes: memeTextAttributes)
-        
-        
-        topText.attributedPlaceholder = NSAttributedString(string: "TOP", attributes: memeTextAttributes )
-        
-        formatTextField(textField: topText)
-        formatTextField(textField: bottomText)
-        
+        setTextAttr(content: "TOP", textField: topText)
+        setTextAttr(content: "BOTTOM", textField: bottomText)
         
     }
     
-    func formatTextField(textField : UITextField){
-        
+    func setTextAttr(content : String, textField : UITextField){
+    
+        textField.attributedPlaceholder = NSAttributedString(string: content, attributes: memeTextAttributes)
         textField.defaultTextAttributes = memeTextAttributes
         textField.textAlignment = .center
-        
     }
     
     
@@ -101,10 +94,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
     @IBAction func EditDidEnd(_ sender: UITextField) {
         
-        if sender.text == "" {
-        sender.placeholder = "TEXT"
-        }
         
+        if sender.text == ""  && sender==bottomText{
+            setTextAttr(content: "BOTTOM", textField: sender)
+        } else if sender.text == ""  && sender==topText{
+             setTextAttr(content: "TOP", textField: sender)
+        }
     }
 
     //Use different sourceType depending on which is the sender
@@ -222,11 +217,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.cgRectValue.height
     }
+
     
     
     func save() {
         
         // Create the meme
+        
         let meme = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
     }
     
